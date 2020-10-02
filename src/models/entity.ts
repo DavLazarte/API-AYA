@@ -1,7 +1,6 @@
 import { Schema, model, Document } from "mongoose";
-import { ICategorySchema } from "../models/category";
 
-export interface ILoca extends Document {
+export interface ILocation extends Document {
   address?: string;
   locality: string;
   city: string;
@@ -19,17 +18,22 @@ export interface IContact extends Document {
   web: string;
   email: string;
 }
-
+export interface ICategory extends Document {
+  name: string;
+  description: string;
+  subcategory: string;
+  state: boolean;
+}
 export interface IEntity extends Document {
   name: string;
-  location: ILoca;
+  location: ILocation;
   contact: IContact;
   imagePath: string;
-  category: ICategorySchema["_id"];
+  category: ICategory;
   businesshours: string;
   state: boolean;
 }
-const contacSchema = new Schema({
+const contactSchema = new Schema({
   cellphone: { type: String, required: true },
   telephone: { type: String },
   facebook: { type: String },
@@ -44,7 +48,7 @@ const contacSchema = new Schema({
   },
 });
 
-const locaSchema = new Schema({
+const locationSchema = new Schema({
   address: { type: String, required: true },
   locality: { type: String },
   city: { type: String, required: true },
@@ -54,13 +58,19 @@ const locaSchema = new Schema({
   longitud: { type: String },
   country: { type: String, required: true },
 });
+const categorySchema = new Schema({
+  name: { type: String, required: true },
+  description: { type: String },
+  subcategory: { type: String },
+  state: { type: Boolean },
+});
 
 const EntitySchema = new Schema({
   name: { type: String, required: true },
-  location: locaSchema,
-  contact: contacSchema,
+  location: locationSchema,
+  contact: contactSchema,
   imagePath: { type: String },
-  category: { type: Schema.Types.ObjectId, required: true },
+  category: [categorySchema],
   businessHours: { type: String },
   state: { type: Boolean },
   created_at: { type: Date, default: Date.now },
