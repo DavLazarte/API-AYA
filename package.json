@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\" ",
-    "build": "next build"
+    "build": "node index.js"
   },
   "keywords": [],
   "author": "",
