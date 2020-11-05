@@ -9,10 +9,11 @@ import categoryRoutes from "./routes/category.routes";
 import entityRoutes from "./routes/entity.routes";
 import farmaciaRoutes from "./routes/farmacia.routes";
 //initializations
+const PORT = process.env.PORT || '8080';
 const app = express();
 //settings
 
-app.set("port", process.env.PORT || 4000);
+app.set("port", PORT);
 
 //middlewares
 app.use(morgan("dev"));
@@ -23,7 +24,7 @@ app.use(passport.initialize());
 passport.use(passportMiddleware);
 //routes
 app.get("/", (req, res) => {
-  res.send(`THE API is at http://localhost:${app.get("port")}`);
+  res.send(`THE API is running at:${app.get("port")}`);
 });
 
 app.use(authRoutes);
