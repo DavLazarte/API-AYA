@@ -23,7 +23,7 @@ app.use(passport.initialize());
 passport.use(passportMiddleware);
 //routes
 app.get("/", (req, res) => {
-  res.send(`THE API is at https://api-aya.herokuapp.com:${app.get("port")}`);
+  res.send(`THE API is at http://localhost:${app.get("port")}`);
 });
 
 app.use(authRoutes);
