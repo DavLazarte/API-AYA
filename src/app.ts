@@ -9,7 +9,7 @@ import categoryRoutes from "./routes/category.routes";
 import entityRoutes from "./routes/entity.routes";
 import farmaciaRoutes from "./routes/farmacia.routes";
 //initializations
-const PORT = process.env.PORT || '8080';
+const PORT = process.env.PORT || 8080;
 const app = express();
 //settings
 const corsOptions = {
