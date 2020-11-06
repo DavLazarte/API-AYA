@@ -5,7 +5,9 @@ import config from './config/config'
 const dbOptions: ConnectionOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    user: config.DB.USER,
+    pass: config.DB.PASSWORD
 }
 
 mongoose.connect(config.DB.URI, dbOptions)
@@ -18,5 +20,5 @@ connection.once('open', () => {
 
 connection.on('error', err => {
     console.log(err);
-    process.exit(0)
+    process.exit();
 })
