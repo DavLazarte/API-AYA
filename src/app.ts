@@ -12,12 +12,16 @@ import farmaciaRoutes from "./routes/farmacia.routes";
 const PORT = process.env.PORT || '8080';
 const app = express();
 //settings
+const corsOptions = {
+  origin: "https://aya-nine.vercel.app/",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 app.set("port", PORT);
 
 //middlewares
 app.use(morgan("dev"));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(passport.initialize());
