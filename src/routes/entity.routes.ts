@@ -7,9 +7,11 @@ import {
   createEntity,
   updateEntity,
   deleteEntity,
+  getEntityHigh,
 } from "../controllers/entity.controller";
 
 router.route("/entities").get(getEntities).post(createEntity);
+router.route("/destacadas").get(getEntityHigh);
 
 router
   .route("/entity/:entId")

@@ -18,6 +18,13 @@ export const getEntity = async (
   const entity = await Entity.findById(entId);
   return res.status(200).json(entity);
 };
+export const getEntityHigh = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const Entities = await Entity.find({state:true}).lean().exec();
+  return res.status(200).json(Entities);
+};
 
 export const createEntity = async (
   req: Request,
