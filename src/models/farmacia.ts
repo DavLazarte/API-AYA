@@ -1,34 +1,42 @@
 import { Schema, model, Document } from "mongoose";
 
-export interface IUbiSchema extends Document {
-  calle?: string;
-  localidad: string;
-  provincia: string;
-  zip: string;
+export interface ILocation extends Document {
+  address?: string;
+  locality: string;
+  city: string;
+  province: string;
+  zipcode: string;
   latitud: string;
   longitud: string;
-  pais: string;
+  country: string;
 }
 export interface IContact extends Document {
-  celular?: string;
-  fijo: string;
+  cellphone?: string;
+  telephone: string;
   facebook: string;
   instagram: string;
   web: string;
   email: string;
 }
-
+export interface ICategory extends Document {
+  name: string;
+  description: string;
+  subcategory: string;
+  state: boolean;
+}
 export interface IFarmaSchema extends Document {
   nombre: string;
-  ubicacion: IUbiSchema;
-  contacto: IContact;
+  location: ILocation;
+  contact: IContact;
   imagePath: string;
+  category:ICategory;
+  businesshours:string;
   turno: number;
   estado: boolean;
 }
-const contacSchema = new Schema({
-  celular: { type: String, required: true },
-  fijo: { type: String },
+const contactSchema = new Schema({
+  cellphone: { type: String, required: true },
+  telephone: { type: String },
   facebook: { type: String },
   instagram: { type: String },
   web: { type: String },
@@ -41,21 +49,30 @@ const contacSchema = new Schema({
   },
 });
 
-const ubiSchema = new Schema({
-  calle: { type: String, required: true },
-  localidad: { type: String, required: true },
-  provincia: { type: String, required: true },
-  zip: { type: String, required: true },
+const locationSchema = new Schema({
+  address: { type: String, required: true },
+  locality: { type: String },
+  city: { type: String, required: true },
+  province: { type: String, required: true },
+  zipcode: { type: String, required: true },
   latitud: { type: String },
   longitud: { type: String },
-  pais: { type: String, required: true },
+  country: { type: String, required: true },
+});
+const categorySchema = new Schema({
+  name: { type: String, required: true },
+  description: { type: String },
+  subcategory: { type: String },
+  state: { type: Boolean },
 });
 
 const FarmaSchema = new Schema({
   nombre: { type: String, required: true },
-  ubicacion: ubiSchema,
-  contacto: contacSchema,
+  location: locationSchema,
+  contact: contactSchema,
   imagePath: { type: String },
+  category: [categorySchema],
+  businessHours: { type: String },
   turno: { type: Number, required: true },
   estado: { type: Boolean },
   created_at: { type: Date, default: Date.now },
