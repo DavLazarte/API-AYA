@@ -8,8 +8,10 @@ import specialRoutes from "./routes/special.routes";
 import categoryRoutes from "./routes/category.routes";
 import entityRoutes from "./routes/entity.routes";
 import farmaciaRoutes from "./routes/farmacia.routes";
+import serviceRoutes from "./routes/service.routes";
+import gastronomyRoutes from "./routes/gastronomy.routes";
 //initializations
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 const app = express();
 //settings
 const corsOptions = {
@@ -31,10 +33,13 @@ app.get("/", (req, res) => {
   res.send(`THE API is running at:${app.get("port")}`);
 });
 
+//Routes
 app.use(authRoutes);
 app.use(specialRoutes);
 app.use(farmaciaRoutes);
 app.use(entityRoutes);
 app.use(categoryRoutes);
+app.use(serviceRoutes);
+app.use(gastronomyRoutes);
 
 export default app;

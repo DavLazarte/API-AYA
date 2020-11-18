@@ -1,7 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface ILocation extends Document {
-  address: string;
+  address?: string;
   locality: string;
   city: string;
   province: string;
@@ -11,7 +11,7 @@ export interface ILocation extends Document {
   country: string;
 }
 export interface IContact extends Document {
-  cellphone: string;
+  cellphone?: string;
   telephone: string;
   facebook: string;
   instagram: string;
@@ -24,16 +24,22 @@ export interface IContact extends Document {
 //   subcategory: string;
 //   state: boolean;
 // }
-export interface IFarmaSchema extends Document {
+export interface IMenu extends Document {
+  name: string;
+  description: string;
+  price: string;
+  state: boolean;
+}
+export interface IGastronomyLocal extends Document {
   name: string;
   location: ILocation;
   contact: IContact;
   imagePath: string;
-  category:[];
-  subcategory:[];
-  businesshours:string;
-  turno: number;
-  destacado: boolean;
+  categories: [];
+  subcategories: [];
+  menus:IMenu;
+  businesshours: string;
+  delivery: boolean;
   state: boolean;
 }
 const locationSchema = new Schema({
@@ -47,37 +53,43 @@ const locationSchema = new Schema({
   country: { type: String, required: true },
 });
 const contactSchema = new Schema({
-  cellphone: { type: String, required: true },
-  telephone: { type: String },
-  facebook: { type: String },
-  instagram: { type: String },
-  web: { type: String },
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-  },
-});
+    cellphone: { type: String, required: true },
+    telephone: { type: String },
+    facebook: { type: String },
+    instagram: { type: String },
+    web: { type: String },
+    email: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+  });
 // const categorySchema = new Schema({
 //   name: { type: String, required: true },
 //   description: { type: String },
 //   subcategory: { type: String },
 //   state: { type: Boolean },
 // });
+const menuSchema = new Schema({
+  name: { type: String, required: true },
+  description: { type: String },
+  price: { type: Number },
+  state: { type: Boolean },
+});
 
-const FarmaSchema = new Schema({
+const gastronomyLocalSchema = new Schema({
   name: { type: String, required: true },
   location: locationSchema,
   contact: contactSchema,
-  imagePath: { type: String, required: true },
-  categories: {type: Array,required: true},
-  subcategories: {type: Array},
+  imagePath: { type: String },
+  categories: {type: Array, required: true},
+  subcategories: {type: Array, required: true},
+  menus:[menuSchema],
   businessHours: { type: String },
-  turno: { type: Number, required: true },
-  destacada: { type: Boolean },
+  delivery: { type: Boolean },
   state: { type: Boolean },
   created_at: { type: Date, default: Date.now },
 });
 
-export default model<IFarmaSchema>("Farmacia", FarmaSchema);
+export default model<IGastronomyLocal>("Gastronomy", gastronomyLocalSchema);

@@ -1,7 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface ILocation extends Document {
-  address: string;
+  address?: string;
   locality: string;
   city: string;
   province: string;
@@ -11,7 +11,7 @@ export interface ILocation extends Document {
   country: string;
 }
 export interface IContact extends Document {
-  cellphone: string;
+  cellphone?: string;
   telephone: string;
   facebook: string;
   instagram: string;
@@ -24,16 +24,16 @@ export interface IContact extends Document {
 //   subcategory: string;
 //   state: boolean;
 // }
-export interface IFarmaSchema extends Document {
+
+export interface IServices extends Document {
   name: string;
+  description: string;
   location: ILocation;
   contact: IContact;
   imagePath: string;
-  category:[];
-  subcategory:[];
-  businesshours:string;
-  turno: number;
-  destacado: boolean;
+  categories: [];
+  subcategories: [];
+  businesshours: string;
   state: boolean;
 }
 const locationSchema = new Schema({
@@ -47,18 +47,18 @@ const locationSchema = new Schema({
   country: { type: String, required: true },
 });
 const contactSchema = new Schema({
-  cellphone: { type: String, required: true },
-  telephone: { type: String },
-  facebook: { type: String },
-  instagram: { type: String },
-  web: { type: String },
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-  },
-});
+    cellphone: { type: String, required: true },
+    telephone: { type: String },
+    facebook: { type: String },
+    instagram: { type: String },
+    web: { type: String },
+    email: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+  });
 // const categorySchema = new Schema({
 //   name: { type: String, required: true },
 //   description: { type: String },
@@ -66,18 +66,17 @@ const contactSchema = new Schema({
 //   state: { type: Boolean },
 // });
 
-const FarmaSchema = new Schema({
+const ServicesSchema = new Schema({
   name: { type: String, required: true },
+  description: { type: String },
   location: locationSchema,
   contact: contactSchema,
-  imagePath: { type: String, required: true },
-  categories: {type: Array,required: true},
-  subcategories: {type: Array},
+  imagePath: { type: String },
+  categories: {type: Array, required: true},
+  subcategories: {type: Array, required: true},
   businessHours: { type: String },
-  turno: { type: Number, required: true },
-  destacada: { type: Boolean },
   state: { type: Boolean },
   created_at: { type: Date, default: Date.now },
 });
 
-export default model<IFarmaSchema>("Farmacia", FarmaSchema);
+export default model<IServices>("Service", ServicesSchema);
