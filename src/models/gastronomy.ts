@@ -27,7 +27,8 @@ export interface IContact extends Document {
 export interface IMenu extends Document {
   name: string;
   description: string;
-  price: string;
+  image:string;
+  price: number;
   state: boolean;
 }
 export interface IGastronomyLocal extends Document {
@@ -40,6 +41,9 @@ export interface IGastronomyLocal extends Document {
   menus:IMenu;
   businesshours: string;
   delivery: boolean;
+  almuerzo: boolean;
+  merienda: boolean;
+  destacada: boolean;
   state: boolean;
 }
 const locationSchema = new Schema({
@@ -74,6 +78,7 @@ const contactSchema = new Schema({
 const menuSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String },
+  image: { type: String },
   price: { type: Number },
   state: { type: Boolean },
 });
@@ -88,6 +93,9 @@ const gastronomyLocalSchema = new Schema({
   menus:[menuSchema],
   businessHours: { type: String },
   delivery: { type: Boolean },
+  almuerzo: { type: Boolean },
+  merienda: { type: Boolean },
+  destacada: { type: Boolean },
   state: { type: Boolean },
   created_at: { type: Date, default: Date.now },
 });

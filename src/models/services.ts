@@ -34,6 +34,7 @@ export interface IServices extends Document {
   categories: [];
   subcategories: [];
   businesshours: string;
+  destacada: boolean;
   state: boolean;
 }
 const locationSchema = new Schema({
@@ -75,6 +76,7 @@ const ServicesSchema = new Schema({
   categories: {type: Array, required: true},
   subcategories: {type: Array, required: true},
   businessHours: { type: String },
+  destacada: { type: Boolean },
   state: { type: Boolean },
   created_at: { type: Date, default: Date.now },
 });

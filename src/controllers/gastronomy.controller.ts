@@ -45,3 +45,10 @@ export const deleteLocalG = async (
   const localG = (await Gastronomy.findByIdAndRemove(locId)) as IGastronomyLocal;
   return res.status(200).json({ message: "Successfully deleted" });
 };
+export const getLocalHigh = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const localdest = await Gastronomy.find({destacada:true}).lean().exec();
+  return res.status(200).json(localdest);
+};
