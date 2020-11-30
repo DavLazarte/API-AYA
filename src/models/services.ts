@@ -18,12 +18,6 @@ export interface IContact extends Document {
   web: string;
   email: string;
 }
-// export interface ICategory extends Document {
-//   name: string;
-//   description: string;
-//   subcategory: string;
-//   state: boolean;
-// }
 
 export interface IServices extends Document {
   name: string;

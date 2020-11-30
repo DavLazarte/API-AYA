@@ -22,9 +22,10 @@ export const getEntityHigh = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const Entities = await Entity.find({state:true}).lean().exec();
+  const Entities = await Entity.find({destacada:true}).lean().exec();
   return res.status(200).json(Entities);
 };
+
 
 export const createEntity = async (
   req: Request,
@@ -51,4 +52,26 @@ export const deleteEntity = async (
   const { entId } = req.params;
   const entity = (await Entity.findByIdAndRemove(entId)) as IEntity;
   return res.status(200).json({ message: "Successfully deleted" });
+};
+//funciones para obtener los locales de salud,servicios y gastronomia
+export const getSalud = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const Entities = await Entity.find({categories:{$all:["salud"]}}).lean().exec();
+  return res.status(200).json(Entities);
+};
+export const getAllGastronomy = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const Entities = await Entity.find({categories:{$all:["gastronomia"]}}).lean().exec();
+  return res.status(200).json(Entities);
+};
+export const getAllServices = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const Entities = await Entity.find({categories:{$all:["services"]}}).lean().exec();
+  return res.status(200).json(Entities);
 };

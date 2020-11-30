@@ -18,19 +18,28 @@ export interface IContact extends Document {
   web: string;
   email: string;
 }
-export interface ICategory extends Document {
+export interface IMenu extends Document {
   name: string;
   description: string;
-  subcategory: string;
+  image:string;
+  price: number;
   state: boolean;
 }
 export interface IEntity extends Document {
   name: string;
+  description: string;
   location: ILocation;
   contact: IContact;
   imagePath: string;
-  category: ICategory;
+  categories: [];
+  subcategories: [];
+  menus:IMenu;
   businesshours: string;
+  turno: number;
+  delivery: boolean;
+  almuerzo: boolean;
+  merienda: boolean;
+  destacada: boolean;
   state: boolean;
 }
 const contactSchema = new Schema({
@@ -57,20 +66,29 @@ const locationSchema = new Schema({
   longitud: { type: String },
   country: { type: String, required: true },
 });
-const categorySchema = new Schema({
+const menuSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String },
-  subcategory: { type: String },
+  image: { type: String },
+  price: { type: Number },
   state: { type: Boolean },
 });
 
 const EntitySchema = new Schema({
   name: { type: String, required: true },
+  description: { type: String },
   location: locationSchema,
   contact: contactSchema,
   imagePath: { type: String },
-  category: [categorySchema],
+  categories: {type: Array, required:true},
+  subcategories: {type: Array},
   businessHours: { type: String },
+  turno: { type: String },
+  menus:[menuSchema],
+  delivery: { type: Boolean },
+  almuerzo: { type: Boolean },
+  merienda: { type: Boolean },
+  destacada: { type: Boolean },
   state: { type: Boolean },
   created_at: { type: Date, default: Date.now },
 });
