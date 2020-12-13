@@ -34,7 +34,7 @@ export interface IEntity extends Document {
   categories: [];
   subcategories: [];
   menus:IMenu;
-  businesshours: string;
+  businessHours: string;
   turno: number;
   delivery: boolean;
   almuerzo: boolean;
