@@ -37,9 +37,11 @@ export interface IEntity extends Document {
   businessHours: string;
   turno: number;
   delivery: boolean;
+  desayuno: boolean;
   almuerzo: boolean;
   merienda: boolean;
   destacada: boolean;
+  plan:number;
   state: boolean;
 }
 const contactSchema = new Schema({
@@ -83,12 +85,14 @@ const EntitySchema = new Schema({
   categories: {type: Array, required:true},
   subcategories: {type: Array},
   businessHours: { type: String },
-  turno: { type: String },
+  turno: { type: Number },
   menus:[menuSchema],
   delivery: { type: Boolean },
+  desayuno: { type: Boolean },
   almuerzo: { type: Boolean },
   merienda: { type: Boolean },
   destacada: { type: Boolean },
+  plan: { type: Number },
   state: { type: Boolean },
   created_at: { type: Date, default: Date.now },
 });
