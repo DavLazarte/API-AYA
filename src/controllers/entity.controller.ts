@@ -31,6 +31,7 @@ export const createEntity = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+  req.setTimeout(500000)
   const newEntity = new Entity(req.body);
   await newEntity.save();
   return res.status(201).json(newEntity);
